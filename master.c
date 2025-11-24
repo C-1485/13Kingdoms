@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <SDL2/SDL_surface.h>
 #include <stdbool.h>
 
@@ -9,9 +10,6 @@ SDL_Window* gWindow = NULL;
 
 //The surface contained by the window
 SDL_Surface* gScreenSurface = NULL;
-
-//The image we will load and show on the screen
-SDL_Surface* gHelloWorld = NULL;
 
 //The images that correspond to a keypress
 SDL_Surface* gKeyPressSurfaces[KEY_PRESS_SURFACE_TOTAL];
@@ -44,8 +42,18 @@ bool Init()
         }
         else
         {
-            //Get window surface
-            gScreenSurface = SDL_GetWindowSurface( gWindow );
+            //Initialize PNG loading
+            int imgFlags = IMG_INIT_PNG;
+            if( !( IMG_Init( imgFlags ) & imgFlags ) )
+            {
+                printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
+                success = false;
+            }
+            else
+            {
+                //Get window surface
+                gScreenSurface = SDL_GetWindowSurface( gWindow );
+            }
         }
     }
 
@@ -54,14 +62,29 @@ bool Init()
 
 SDL_Surface* loadSurface( char *path )
 {
+    //The final optimized image
+    SDL_Surface* optimizedSurface = NULL;
+
     //Load image at specified path
-    SDL_Surface* loadedSurface = SDL_LoadBMP( path );
+    SDL_Surface* loadedSurface = IMG_Load( path );
     if( loadedSurface == NULL )
     {
-        printf( "Unable to load image %s! SDL Error: %s\n", path, SDL_GetError() );
+        printf( "Unable to load image %s! SDL Error: %s\n", path, IMG_GetError() );
+    }
+    else
+    {
+        //Convert surface to screen format
+        optimizedSurface = SDL_ConvertSurface( loadedSurface, gScreenSurface->format, 0 );
+        if( optimizedSurface == NULL )
+        {
+            printf( "Unable to optimize image %s! SDL Error: %s\n", path, IMG_GetError() );
+        }
+
+        //Get rid of old loaded surface
+        SDL_FreeSurface( loadedSurface );
     }
 
-    return loadedSurface;
+    return optimizedSurface;
 }
 
 bool LoadMedia()
@@ -78,7 +101,7 @@ bool LoadMedia()
     }
 
     //Load up surface
-    gKeyPressSurfaces[ KEY_PRESS_SURFACE_UP ] = loadSurface( "assets/c-art01.bmp" );
+    gKeyPressSurfaces[ KEY_PRESS_SURFACE_UP ] = loadSurface( "assets/c-art01.png" );
     if( gKeyPressSurfaces[ KEY_PRESS_SURFACE_UP ] == NULL )
     {
         printf( "Failed to load up image!\n" );
@@ -115,8 +138,8 @@ bool LoadMedia()
 void Close()
 {
     //Deallocate surface
-    SDL_FreeSurface( gHelloWorld );
-    gHelloWorld = NULL;
+    SDL_FreeSurface( gCurrentSurface );
+    gCurrentSurface = NULL;
 
     //Destroy window
     SDL_DestroyWindow( gWindow );
