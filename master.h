@@ -8,6 +8,9 @@
 //The window we'll be rendering to
 extern SDL_Window* gWindow;
 
+
+// ==== surface
+
 //The surface contained by the window
 extern SDL_Surface* gScreenSurface;
 
@@ -16,6 +19,17 @@ extern SDL_Surface* gKeyPressSurfaces[];
 
 //Current displayed image
 extern SDL_Surface* gCurrentSurface;
+
+
+// ==== textures
+
+//The window renderer
+extern SDL_Renderer* gRenderer;
+
+//Current displayed texture
+extern SDL_Texture* gTexture;
+
+// ====
 
 extern const int SCREEN_WIDTH;
 extern const int SCREEN_HEIGHT;
@@ -33,8 +47,13 @@ enum KeyPressSurfaces
 
 bool Init();
 
+//Loads individual image as texture
+SDL_Texture* loadTexture( char *path );
+
 //Loads individual image
 SDL_Surface* loadSurface( char *path );
+
+bool KeyPressSurfaces(bool *success);
 
 bool LoadMedia();
 
