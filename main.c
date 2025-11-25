@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#include "master.h"
+#include "header/master.h"
 
 /*
 const int SCREEN_WIDTH = 640;

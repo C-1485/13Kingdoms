@@ -3,7 +3,7 @@
 #include <SDL2/SDL_surface.h>
 #include <stdbool.h>
 
-#include "master.h"
+#include "../header/master.h"
 
 //The window we'll be rendering to
 SDL_Window* gWindow = NULL;
@@ -204,6 +204,25 @@ bool LoadMedia()
         success = false;
     }
     */
+
+    //Load front alpha texture
+    if( !gModulatedTexture.loadFromFile( "13_alpha_blending/fadeout.png" ) )
+    {
+        printf( "Failed to load front texture!\n" );
+        success = false;
+    }
+    else
+    {
+        //Set standard alpha blending
+        gModulatedTexture.setBlendMode( SDL_BLENDMODE_BLEND );
+    }
+
+    //Load background texture
+    if( !gBackgroundTexture.loadFromFile( "13_alpha_blending/fadein.png" ) )
+    {
+        printf( "Failed to load background texture!\n" );
+        success = false;
+    }
 
     return success;
 }
