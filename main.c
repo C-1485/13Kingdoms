@@ -4,6 +4,7 @@
 #include <stdbool.h>
 
 #include "header/master.h"
+#include "header/textures.h"
 
 /*
 const int SCREEN_WIDTH = 640;
@@ -90,6 +91,7 @@ int main( int argc, char* args[] )
                     SDL_RenderPresent( gRenderer );
                     */
 
+                    /*
                     //Clear screen
                     SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
                     SDL_RenderClear( gRenderer );
@@ -110,6 +112,19 @@ int main( int argc, char* args[] )
                     {
                         SDL_RenderDrawPoint( gRenderer, SCREEN_WIDTH / 2, i );
                     }
+
+                    //Update screen
+                    SDL_RenderPresent( gRenderer );
+                    */
+
+                    //Clear screen
+                    SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+                    SDL_RenderClear( gRenderer );
+
+                    //Render background texture to screen
+                    RenderTexture( 0, 0, &back_texture );
+                    RenderTexture(SCREEN_WIDTH / 64, SCREEN_HEIGHT / 64, &front_texture );
+
 
                     //Update screen
                     SDL_RenderPresent( gRenderer );

@@ -4,6 +4,7 @@
 #include <stdbool.h>
 
 #include "../header/master.h"
+#include "../header/textures.h"
 
 //The window we'll be rendering to
 SDL_Window* gWindow = NULL;
@@ -31,6 +32,10 @@ SDL_Texture* gTexture = NULL;
 
 // ====
 
+Texture front_texture;
+Texture back_texture;
+
+// ====
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
@@ -205,33 +210,29 @@ bool LoadMedia()
     }
     */
 
+    InitTexture(&front_texture);
+    InitTexture(&back_texture);
+
     //Load front alpha texture
-    if( !gModulatedTexture.loadFromFile( "13_alpha_blending/fadeout.png" ) )
+    if( !LoadTexture( "assets/test_assets/front_texture.png", &front_texture ) )
     {
         printf( "Failed to load front texture!\n" );
         success = false;
     }
-    else
+    if( !LoadTexture( "assets/test_assets/back_texture.png", &back_texture ) )
     {
-        //Set standard alpha blending
-        gModulatedTexture.setBlendMode( SDL_BLENDMODE_BLEND );
-    }
-
-    //Load background texture
-    if( !gBackgroundTexture.loadFromFile( "13_alpha_blending/fadein.png" ) )
-    {
-        printf( "Failed to load background texture!\n" );
+        printf( "Failed to load front texture!\n" );
         success = false;
     }
+
 
     return success;
 }
 
 void Close()
 {
-    //Free loaded image
-    SDL_DestroyTexture( gTexture );
-    gTexture = NULL;
+    FreeTexture(&front_texture);
+    FreeTexture(&back_texture);
 
     SDL_DestroyRenderer( gRenderer );
     gRenderer = NULL;

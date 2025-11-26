@@ -5,6 +5,8 @@
 #include <SDL2/SDL_surface.h>
 #include <stdbool.h>
 
+#include "../header/textures.h"
+
 //The window we'll be rendering to
 extern SDL_Window* gWindow;
 
@@ -28,6 +30,11 @@ extern SDL_Renderer* gRenderer;
 
 //Current displayed texture
 extern SDL_Texture* gTexture;
+
+// ====
+
+extern Texture front_texture;
+extern Texture back_texture;
 
 // ====
 
