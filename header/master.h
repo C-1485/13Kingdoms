@@ -36,6 +36,7 @@ extern SDL_Texture* gTexture;
 extern Texture front_texture;
 extern Texture back_texture;
 
+extern Texture modulatedtex;
 // ====
 
 extern const int SCREEN_WIDTH;

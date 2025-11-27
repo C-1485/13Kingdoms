@@ -30,10 +30,17 @@ int main( int argc, char* args[] )
         {
 
             //Set default current surface
-            gCurrentSurface = gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ];
+            //gCurrentSurface = gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ];
 
             //Hack to get window to stay up
             SDL_Event e;
+
+            //Modulation components
+            Uint8 r = 255;
+            Uint8 g = 255;
+            Uint8 b = 255;
+
+
             bool quit = false;
             while( quit == false )
             {
@@ -118,6 +125,7 @@ int main( int argc, char* args[] )
                     */
 
                     //Clear screen
+                    /*
                     SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
                     SDL_RenderClear( gRenderer );
 
@@ -128,7 +136,55 @@ int main( int argc, char* args[] )
 
                     //Update screen
                     SDL_RenderPresent( gRenderer );
+                    */
+
+                    else if( e.type == SDL_KEYDOWN )
+                    {
+                        switch( e.key.keysym.sym )
+                        {
+                            //Increase red
+                            case SDLK_q:
+                                r += 32;
+                                break;
+
+                                //Increase green
+                            case SDLK_w:
+                                g += 32;
+                                break;
+
+                                //Increase blue
+                            case SDLK_e:
+                                b += 32;
+                                break;
+
+                                //Decrease red
+                            case SDLK_a:
+                                r -= 32;
+                                break;
+
+                                //Decrease green
+                            case SDLK_s:
+                                g -= 32;
+                                break;
+
+                                //Decrease blue
+                            case SDLK_d:
+                                b -= 32;
+                                break;
+                        }
+                    }
                 }
+
+                //Clear screen
+                SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+                SDL_RenderClear( gRenderer );
+
+                //Modulate and render texture
+                ColorTexture( r, g, b, &modulatedtex );
+                RenderTexture( 0, 0, &modulatedtex );
+
+                //Update screen
+                SDL_RenderPresent( gRenderer );
             }
         }
     }

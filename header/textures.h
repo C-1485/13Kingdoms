@@ -23,7 +23,7 @@ void FreeTexture(Texture *tex_rec);
 bool LoadTexture(char *path, Texture *tex_rec);
 
 //Set color modulation
-//void SetColor( Uint8 red, Uint8 green, Uint8 blue, AlphaBlend *tex );
+void ColorTexture( Uint8 red, Uint8 green, Uint8 blue, Texture *tex_rec );
 
 //Set blending
 //void SetBlendMode( SDL_BlendMode blending );

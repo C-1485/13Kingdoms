@@ -35,6 +35,8 @@ SDL_Texture* gTexture = NULL;
 Texture front_texture;
 Texture back_texture;
 
+Texture modulatedtex;
+
 // ====
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
@@ -214,16 +216,18 @@ bool LoadMedia()
     InitTexture(&back_texture);
 
     //Load front alpha texture
-    if( !LoadTexture( "assets/test_assets/front_texture.png", &front_texture ) )
+    if( !LoadTexture( "assets/test_assets/colormodulation.png", &modulatedtex ) )
     {
         printf( "Failed to load front texture!\n" );
         success = false;
     }
+    /*
     if( !LoadTexture( "assets/test_assets/back_texture.png", &back_texture ) )
     {
         printf( "Failed to load front texture!\n" );
         success = false;
     }
+    */
 
 
     return success;

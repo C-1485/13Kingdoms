@@ -61,13 +61,11 @@ bool LoadTexture(char *path, Texture *tex_rec)
     return tex_rec->texture != NULL;
 }
 
-/*
-void SetColor( Uint8 red, Uint8 green, Uint8 blue, AlphaBlend *tex )
+void ColorTexture( Uint8 red, Uint8 green, Uint8 blue, Texture *tex_rec )
 {
     //Modulate texture
-    SDL_SetTextureColorMod( tex->mtexture, red, green, blue );
+    SDL_SetTextureColorMod( tex_rec->texture, red, green, blue );
 }
-*/
 
 void RenderTexture(int x, int y, Texture *tex_rec)
 {
