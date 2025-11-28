@@ -125,7 +125,7 @@ int main( int argc, char* args[] )
                     */
 
                     //Clear screen
-                    /*
+
                     SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
                     SDL_RenderClear( gRenderer );
 
@@ -136,15 +136,19 @@ int main( int argc, char* args[] )
 
                     //Update screen
                     SDL_RenderPresent( gRenderer );
-                    */
 
+
+                    // color modulation demo
+                    /*
                     else if( e.type == SDL_KEYDOWN )
                     {
                         ColorModulationKeys(&r, &g, &b, &e);
                     }
+                    */
                 }
 
                 //Clear screen
+                /*
                 SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
                 SDL_RenderClear( gRenderer );
 
@@ -154,6 +158,7 @@ int main( int argc, char* args[] )
 
                 //Update screen
                 SDL_RenderPresent( gRenderer );
+                */
             }
         }
     }

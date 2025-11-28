@@ -63,9 +63,18 @@ SDL_Surface* loadSurface( char *path );
 
 bool KeyPressSurfaces(bool *success);
 
+
+// color key demo
+
+bool ColorKeyInit(bool *success, char *path, Texture *tex_rec);
+
+
+// color modulation demo
+
 void ColorModulationKeys(Uint8 *r, Uint8 *g, Uint8 *b, SDL_Event *event_key);
 
 bool ColorModulationInit(bool *success, char *path, Texture *tex_rec);
+
 
 bool LoadMedia(); // *
 

@@ -196,6 +196,21 @@ bool KeyPressSurfaces(bool *success)
 }
 
 
+// color key demo
+
+bool ColorKeyInit(bool *success, char *path, Texture *tex_rec)
+{
+    InitTexture(tex_rec);
+
+    if (!LoadTexture(path, tex_rec))
+    {
+        printf("ERROR: ColorKeyInit");
+        *success = false;
+    }
+    return *success;
+}
+
+
 // color modulation demo
 
 void ColorModulationKeys(Uint8 *r, Uint8 *g, Uint8 *b, SDL_Event *event_key)
@@ -262,10 +277,13 @@ bool LoadMedia()
     }
     */
 
-    InitTexture(&front_texture);
-    InitTexture(&back_texture);
+    // InitTexture(&front_texture);
+    // InitTexture(&back_texture);
 
-    ColorModulationInit(&success, "assets/test_assets/colormodulation.png", &modulatedtex);
+    ColorKeyInit(&success, "assets/test_assets/front_texture.png", &front_texture);
+    ColorKeyInit(&success, "assets/test_assets/back_texture.png", &back_texture);
+
+    //ColorModulationInit(&success, "assets/test_assets/colormodulation.png", &modulatedtex);
     /*
     if( !LoadTexture( "assets/test_assets/back_texture.png", &back_texture ) )
     {
