@@ -6,21 +6,14 @@
 #include "../header/textures.h"
 #include "../header/master.h"
 
+
+// master.c LoadMedia call
+
 void InitTexture(Texture *tex_rec)
 {
     tex_rec->texture = NULL;
     tex_rec->width = 0;
     tex_rec->height = 0;
-}
-
-void FreeTexture(Texture *tex_rec)
-{
-    if (tex_rec->texture != NULL) {
-        SDL_DestroyTexture(tex_rec->texture);
-        tex_rec->texture = NULL;
-        tex_rec->width = 0;
-        tex_rec->height = 0;
-    }
 }
 
 bool LoadTexture(char *path, Texture *tex_rec)
@@ -61,6 +54,35 @@ bool LoadTexture(char *path, Texture *tex_rec)
     return tex_rec->texture != NULL;
 }
 
+
+// master.c Close call
+
+void FreeTexture(Texture *tex_rec)
+{
+    if (tex_rec->texture != NULL) {
+        SDL_DestroyTexture(tex_rec->texture);
+        tex_rec->texture = NULL;
+        tex_rec->width = 0;
+        tex_rec->height = 0;
+    }
+}
+
+
+// helpers: image dimensions
+
+int WTexture(Texture *tex_rec)
+{
+    return tex_rec->width;
+}
+
+int HTexture(Texture *tex_rec)
+{
+    return tex_rec->height;
+}
+
+
+// main.c loop calls
+
 void ColorTexture( Uint8 red, Uint8 green, Uint8 blue, Texture *tex_rec )
 {
     //Modulate texture
@@ -74,12 +96,4 @@ void RenderTexture(int x, int y, Texture *tex_rec)
     SDL_RenderCopy( gRenderer, tex_rec->texture, NULL, &renderQuad );
 }
 
-int WTexture(Texture *tex_rec)
-{
-    return tex_rec->width;
-}
 
-int HTexture(Texture *tex_rec)
-{
-    return tex_rec->height;
-}

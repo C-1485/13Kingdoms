@@ -195,6 +195,56 @@ bool KeyPressSurfaces(bool *success)
     return *success;
 }
 
+
+// color modulation demo
+
+void ColorModulationKeys(Uint8 *r, Uint8 *g, Uint8 *b, SDL_Event *event_key)
+{
+    switch( event_key->key.keysym.sym )
+    {
+        //Increase red
+        case SDLK_q:
+            *r += 32;
+            break;
+
+            //Increase green
+        case SDLK_w:
+            *g += 32;
+            break;
+
+            //Increase blue
+        case SDLK_e:
+            *b += 32;
+            break;
+
+            //Decrease red
+        case SDLK_a:
+            *r -= 32;
+            break;
+
+            //Decrease green
+        case SDLK_s:
+            *g -= 32;
+            break;
+
+            //Decrease blue
+        case SDLK_d:
+            *b -= 32;
+            break;
+    }
+}
+
+bool ColorModulationInit(bool *success, char *path, Texture *tex_rec)
+{
+    if(!LoadTexture(path, tex_rec))
+    {
+        printf( "Failed to load front texture!\n" );
+        *success = false;
+    }
+    return *success;
+}
+
+
 bool LoadMedia()
 {
     //Loading success flag
@@ -215,12 +265,7 @@ bool LoadMedia()
     InitTexture(&front_texture);
     InitTexture(&back_texture);
 
-    //Load front alpha texture
-    if( !LoadTexture( "assets/test_assets/colormodulation.png", &modulatedtex ) )
-    {
-        printf( "Failed to load front texture!\n" );
-        success = false;
-    }
+    ColorModulationInit(&success, "assets/test_assets/colormodulation.png", &modulatedtex);
     /*
     if( !LoadTexture( "assets/test_assets/back_texture.png", &back_texture ) )
     {

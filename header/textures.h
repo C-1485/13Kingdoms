@@ -16,14 +16,19 @@ typedef struct
 //Scene texture
 extern Texture texture_record;
 
-void InitTexture(Texture *tex_rec);
 
-void FreeTexture(Texture *tex_rec);
+// master.c LoadMedia call
+
+void InitTexture(Texture *tex_rec);
 
 bool LoadTexture(char *path, Texture *tex_rec);
 
-//Set color modulation
-void ColorTexture( Uint8 red, Uint8 green, Uint8 blue, Texture *tex_rec );
+
+// master.c Close call
+
+void FreeTexture(Texture *tex_rec);
+
+
 
 //Set blending
 //void SetBlendMode( SDL_BlendMode blending );
@@ -31,11 +36,20 @@ void ColorTexture( Uint8 red, Uint8 green, Uint8 blue, Texture *tex_rec );
 //Set alpha modulation
 // void SetAlpha( Uint8 alpha );
 
+
+// helpers: image dimensions
+
+int WTexture(Texture *tex_rec);
+
+int HTexture(Texture *tex_rec);
+
+
+// main.c loop calls
+
+//Set color modulation
+void ColorTexture( Uint8 red, Uint8 green, Uint8 blue, Texture *tex_rec );
+
 //Renders texture at given point
 void RenderTexture( int x, int y, Texture *tex_rec );
-
-//Gets image dimensions
-int WTexture(Texture *tex_rec);
-int HTexture(Texture *tex_rec);
 
 #endif

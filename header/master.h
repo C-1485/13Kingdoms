@@ -53,7 +53,7 @@ enum KeyPressSurfaces
     KEY_PRESS_SURFACE_TOTAL
 };
 
-bool Init();
+bool Init(); // *
 
 //Loads individual image as texture
 SDL_Texture* loadTexture( char *path );
@@ -63,8 +63,12 @@ SDL_Surface* loadSurface( char *path );
 
 bool KeyPressSurfaces(bool *success);
 
-bool LoadMedia();
+void ColorModulationKeys(Uint8 *r, Uint8 *g, Uint8 *b, SDL_Event *event_key);
 
-void Close();
+bool ColorModulationInit(bool *success, char *path, Texture *tex_rec);
+
+bool LoadMedia(); // *
+
+void Close(); // *
 
 #endif
