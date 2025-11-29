@@ -30,11 +30,7 @@ void FreeTexture(Texture *tex_rec);
 
 
 
-//Set blending
-//void SetBlendMode( SDL_BlendMode blending );
 
-//Set alpha modulation
-// void SetAlpha( Uint8 alpha );
 
 
 // helpers: image dimensions
@@ -45,6 +41,11 @@ int HTexture(Texture *tex_rec);
 
 
 // main.c loop calls
+
+
+void AlphaTexture(Texture *tex_rec, Uint8 *alpha);
+void BlendTexture(Texture *tex_rec, SDL_BlendMode blend);
+
 
 //Set color modulation
 void ColorTexture( Uint8 red, Uint8 green, Uint8 blue, Texture *tex_rec );

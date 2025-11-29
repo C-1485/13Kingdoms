@@ -40,6 +40,8 @@ int main( int argc, char* args[] )
             Uint8 g = 255;
             Uint8 b = 255;
 
+            Uint8 a = 255;
+
 
             bool quit = false;
             while( quit == false )
@@ -126,16 +128,18 @@ int main( int argc, char* args[] )
 
                     //Clear screen
 
-                    SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
-                    SDL_RenderClear( gRenderer );
+                    // SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+                    // SDL_RenderClear( gRenderer );
 
                     //Render background texture to screen
-                    RenderTexture( 0, 0, &back_texture );
-                    RenderTexture(SCREEN_WIDTH / 64, SCREEN_HEIGHT / 64, &front_texture );
+                    // RenderTexture( 0, 0, &back_texture );
+                    // RenderTexture(SCREEN_WIDTH / 64, SCREEN_HEIGHT / 64, &front_texture );
 
 
                     //Update screen
-                    SDL_RenderPresent( gRenderer );
+                    //SDL_RenderPresent( gRenderer );
+
+                    // ColorKeyRender(); // tmp func
 
 
                     // color modulation demo
@@ -145,20 +149,58 @@ int main( int argc, char* args[] )
                         ColorModulationKeys(&r, &g, &b, &e);
                     }
                     */
+
+
+                    // alpha blend
+                    //Handle key presses
+                    else if( e.type == SDL_KEYDOWN )
+                    {
+                        //Increase alpha on w
+                        if( e.key.keysym.sym == SDLK_w )
+                        {
+                            //Cap if over 255
+                            if( a + 32 > 255 )
+                            {
+                                a = 255;
+                            }
+                            //Increment otherwise
+                            else
+                            {
+                                a += 32;
+                            }
+                        }
+                        //Decrease alpha on s
+                        else if( e.key.keysym.sym == SDLK_s )
+                        {
+                            //Cap if below 0
+                            if( a - 32 < 0 )
+                            {
+                                a = 0;
+                            }
+                            //Decrement otherwise
+                            else
+                            {
+                                a -= 32;
+                            }
+                        }
+                    }
                 }
 
                 //Clear screen
-                /*
+
                 SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
                 SDL_RenderClear( gRenderer );
 
                 //Modulate and render texture
-                ColorTexture( r, g, b, &modulatedtex );
-                RenderTexture( 0, 0, &modulatedtex );
+                //ColorTexture( r, g, b, &modulatedtex );
+                RenderTexture( 0, 0, &back_texture );
+
+                AlphaTexture(&front_texture, &a);
+                RenderTexture(0, 0, &front_texture);
 
                 //Update screen
                 SDL_RenderPresent( gRenderer );
-                */
+
             }
         }
     }

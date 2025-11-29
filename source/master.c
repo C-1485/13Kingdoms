@@ -204,7 +204,7 @@ bool ColorKeyInit(bool *success, char *path, Texture *tex_rec)
 
     if (!LoadTexture(path, tex_rec))
     {
-        printf("ERROR: ColorKeyInit");
+        printf("ERROR: ColorKeyInit\n");
         *success = false;
     }
     return *success;
@@ -253,7 +253,7 @@ bool ColorModulationInit(bool *success, char *path, Texture *tex_rec)
 {
     if(!LoadTexture(path, tex_rec))
     {
-        printf( "Failed to load front texture!\n" );
+        printf( "ERROR: ColorModulationInit\n" );
         *success = false;
     }
     return *success;
@@ -280,17 +280,28 @@ bool LoadMedia()
     // InitTexture(&front_texture);
     // InitTexture(&back_texture);
 
-    ColorKeyInit(&success, "assets/test_assets/front_texture.png", &front_texture);
-    ColorKeyInit(&success, "assets/test_assets/back_texture.png", &back_texture);
+    // ColorKeyInit(&success, "assets/test_assets/front_texture.png", &front_texture);
+    // ColorKeyInit(&success, "assets/test_assets/back_texture.png", &back_texture);
 
     //ColorModulationInit(&success, "assets/test_assets/colormodulation.png", &modulatedtex);
-    /*
-    if( !LoadTexture( "assets/test_assets/back_texture.png", &back_texture ) )
+
+    if( !LoadTexture( "assets/test_assets/front_texture.png", &front_texture ) )
     {
         printf( "Failed to load front texture!\n" );
         success = false;
     }
-    */
+    else
+    {
+        BlendTexture(&front_texture, SDL_BLENDMODE_BLEND);
+    }
+
+    if (!LoadTexture( "assets/test_assets/back_texture.png", &back_texture ))
+    {
+        printf( "Failed to load back texture!\n" );
+        success = false;
+    }
+
+
 
 
     return success;

@@ -83,6 +83,18 @@ int HTexture(Texture *tex_rec)
 
 // main.c loop calls
 
+void AlphaTexture(Texture *tex_rec, Uint8 *alpha)
+{
+    //Modulate texture alpha
+    SDL_SetTextureAlphaMod( tex_rec->texture, *alpha );
+}
+
+void BlendTexture(Texture *tex_rec, SDL_BlendMode blend)
+{
+    //Set blending function
+    SDL_SetTextureBlendMode(tex_rec->texture, blend);
+}
+
 void ColorTexture( Uint8 red, Uint8 green, Uint8 blue, Texture *tex_rec )
 {
     //Modulate texture

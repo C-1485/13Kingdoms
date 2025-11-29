@@ -63,6 +63,9 @@ SDL_Surface* loadSurface( char *path );
 
 bool KeyPressSurfaces(bool *success);
 
+// ===
+
+bool InitMaster();
 
 // color key demo
 
